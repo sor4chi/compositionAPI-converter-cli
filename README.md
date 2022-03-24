@@ -5,6 +5,7 @@ This algolithm is made by https://github.com/miyaoka/vue-composition-converter
 ## setup
 ```bash
 npm install
+npm run build
 npm link
 ```
 
