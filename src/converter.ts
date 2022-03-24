@@ -26,7 +26,7 @@ export const convertSrc = (input: string): string => {
   if (exportAssignNode) {
     // optionsAPI
     const convertedScript: string = convertOptionsApi(sourceFile);
-    const returnVueScript: string = `<template>${templateContent}\n</template>\n<script>\n${convertedScript}\n</script>\n<style scoped>\n${styleContent}</style>`;
+    const returnVueScript: string = `<template>${templateContent}\n</template>\n\n<script>\n${convertedScript}\n</script>\n\n<style scoped>\n${styleContent}</style>`;
     return returnVueScript;
   }
 
@@ -34,7 +34,7 @@ export const convertSrc = (input: string): string => {
   if (classNode && ts.isClassDeclaration(classNode)) {
     // classAPI
     const convertedScript: string = convertClass(classNode, sourceFile);
-    const returnVueScript: string = `<template>${templateContent}</template>\n<script>\n${convertedScript}</script>\n<style scoped>\n${styleContent}</style>`;
+    const returnVueScript: string = `<template>${templateContent}</template>\n\n<script>\n${convertedScript}</script>\n\n<style scoped>\n${styleContent}</style>`;
     return returnVueScript;
   }
 

@@ -11,4 +11,14 @@ if (!srcFilePath.match(/\.vue$/)) {
 const srcFile = fs.readFileSync(srcFilePath, "utf8");
 const converted = convertSrc(srcFile);
 
-fs.writeFileSync(srcFilePath, converted);
+let unicodeUnescape = function (str: string): string {
+  return str
+    .replace(/\\u([\d\w]{4})/gi, (match, grp) => {
+      return String.fromCharCode(parseInt(grp, 16));
+    })
+    .replace(/\\/g, "");
+};
+
+const unescapedScript = unicodeUnescape(converted);
+
+fs.writeFileSync(srcFilePath, unescapedScript, "utf8");

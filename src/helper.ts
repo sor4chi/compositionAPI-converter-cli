@@ -157,7 +157,7 @@ export const getExportStatement = (
   propNames: string[],
   otherProps: ts.ObjectLiteralElementLike[]
 ) => {
-  const propsArg = propNames.length === 0 ? '_props' : `props`
+  const propsArg = propNames.length === 0 ? '_' : `props`
 
   const setupArgs = [propsArg, 'ctx'].map((name) =>
     ts.factory.createParameterDeclaration(undefined, undefined, undefined, name)
