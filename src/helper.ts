@@ -132,8 +132,8 @@ export const replaceThisContext = (
 ) => {
   return str
     .replace(/this\.\$(\w+)/g, (_, p1) => {
-      if (contextProps.includes(p1)) return `ctx.${p1}`
-      return `ctx.root.$${p1}`
+      if (contextProps.includes(p1)) return p1
+      return `root.$${p1}`
     })
     .replace(/this\.([\w-]+)/g, (_, p1) => {
       return refNameMap.has(p1) ? `${p1}.value` : p1
@@ -159,9 +159,9 @@ export const getExportStatement = (
 ) => {
   const propsArg = propNames.length === 0 ? '_' : `props`
 
-  const setupArgs = [propsArg, 'ctx'].map((name) =>
+  const setupArgs = [propsArg, `{ ${contextProps.join(', ')} }`].map((name) =>
     ts.factory.createParameterDeclaration(undefined, undefined, undefined, name)
-  )
+  );
 
   const setupMethod = ts.factory.createMethodDeclaration(
     undefined,
